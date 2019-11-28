@@ -7,8 +7,10 @@
     var modalFooter=document.getElementById("modal-footer");
     var nextBtn=document.getElementById("next-btn");
     var finishBtn=document.getElementById("finish-btn");
+    var saveBtn=document.getElementById("save-btn");
     var status=document.getElementById("status");
     var radios=document.getElementsByName("quiz");
+    var highScore=document.getElementById("high-score");
     
     var remainingTime=75;
     var quizNum=-1;
@@ -18,6 +20,8 @@
     var incorrect=0;
     var skipped=0;
     var clickCount=0;
+    var totalScore=0;
+    var playerName="";
 
 
 function start(){
@@ -40,13 +44,11 @@ function displayNextQuiz(){
     clickCount=0;
     for(var i=0; i<4; i++){
     var labelEl=document.getElementsByClassName("quiz");
-    labelEl[i].innerHTML="<input type=\"radio\" name=\"quiz\">"+questions[quizNum].choices[i];
+    labelEl[i].innerHTML=radioHtml+questions[quizNum].choices[i];
     }
     if(quizNum==questions.length-1){
         $("#next-btn").css("display","none");
-        $("#finish-btn").css("display","block");
-        //change the next button to finish button
-        
+        $("#finish-btn").css("display","block");       
     }
 }
 
@@ -81,19 +83,71 @@ function checkAnswer(userChoice){
 
 function endQuiz(status){
     clearInterval(intervalObj);
-    modalFooter.textContent="";
+    $("#status").text("");
     modalTitle.textContent=status;
-    modalBody.innerHTML="Correct answers: "+correct+"<br>Incorrect answers: "+incorrect+"<br>Skipped: "+(questions.length-correct-incorrect);
+    modalBody.innerHTML="Correct answers: "+correct+"<br>Incorrect answers: "+incorrect+"<br>Skipped: "+(questions.length-correct-incorrect)
+    +scoreHtml+nameInputHtml;
+    $("#score").text(calculateScore());
+    $("#score").text();
+    $("#save-btn").css("display","block");
+    $("#finish-btn").css("display","none");
 }
 
+function calculateScore(){
+    if(correct>0){
+    totalScore+=correct*5;
+    if(remainingTime>0){
+        totalScore+=remainingTime/(incorrect+skipped+1);
+        }
+    }
+    totalScore=Math.floor(totalScore);
+    return "Total Score: "+totalScore;
+}
+
+function saveScore(){
+playerName=$(".form-control").val();
+   localStorage.setItem("Code_Quiz_Player-"+playerName,totalScore);
+}  
+
+function displayHighScore(){
+    modalFooter.innerText="";
+    modalTitle.textContent="The highest score: ";
+    modalBody.innerHTML="";
+    var maxName="undefined";
+    var maxScore=0;
+    for(var i=0; i<localStorage.length; i++){
+        if(localStorage.key(i).startsWith("Code_Quiz_Player")){
+            var tempName=localStorage.key(i);
+            var tempScore=localStorage.getItem(localStorage.key(i));
+           if(tempScore>maxScore){
+               console.log("greater");
+               maxScore=tempScore;
+               maxName=tempName.slice(tempName.indexOf("-")+1);
+           }
+        }
+    }
+
+    var div= document.createElement("div");
+    div.setAttribute("id","high-score");
+    if(maxName=="undefined"){
+        div.textContent="No history to display.";
+    }else{
+     div.textContent=maxName+" scored: "+maxScore;
+    }
+    modalBody.appendChild(div);
+}
 
 
 startBtn.addEventListener("click",start);
 nextBtn.addEventListener("click",displayNextQuiz);
 finishBtn.addEventListener("click",function(){
-    $("#modal-title").css("color","#3dab07");
-    endQuiz("You have completed the quiz in "+remainingTime+" seconds!");
+    $("#modal-title").css("color","#007bff");
+    endQuiz("You have completed the quiz!");
 });
+saveBtn.addEventListener("click",saveScore);
+highScore.addEventListener("click",displayHighScore);
 
 
-
+var nameInputHtml="<br>"+"<input placeholder=\"Enter your name here\" class=\"form-control\"></input>";
+var scoreHtml="<br>"+"<div id=\"score\"></div>";
+var radioHtml="<input type=\"radio\" name=\"quiz\">";

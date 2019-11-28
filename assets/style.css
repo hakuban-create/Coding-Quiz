@@ -60,7 +60,31 @@ label{
     margin: 10px 20px;
 }
 
+#save-btn{
+    display: none;
+    position: absolute;
+    bottom: 0px;
+    right: 30px !important;
+    right:10px;
+    margin: 10px 20px;
+}
+#score{
+    color:#007bff;
+    margin: 20px 0px 10px 0px;
+    font-size: 19px;
+
+}
 input{
     margin: 0px 10px !important;
+}
+
+.form-control{
+   margin: 0px 0 10px 0px !important;
+    width: 90% !important;
+}
+
+#high-score{
+    color:#007bff;
+    font-size: 19px;
 }
 
