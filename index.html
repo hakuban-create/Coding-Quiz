@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>Coding Quiz</title>
+        <link rel="stylesheet" href="assets/style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    </head>
+
+    <body>
+       
+        <div class="nav nav-pills nav-justified">
+            <a class="navbar-brand" id="high-score" href="#">View High Scores</a>
+            <div class="nav-item" id="timer">
+                <span>Time:</span>
+                <span id="time">75</span>
+            </div>
+        </div>
+
+        <div class="container">
+            <h1>Coding Quiz Challenge</h1>
+            <p id="instruction">
+                 Try to answer following code-related questions within 75 seconds limit.
+                <br> Keep in mind that incorrect answer will penalize your scoretime</br> 
+                by 10 seconds!
+            </p>
+
+                              <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" id="start-btn">Start Quiz</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="modal-title"></h5>
+                    </div>
+                    <div class="modal-body" id="modal-body">
+
+                            <label class="quiz"></label>
+                            <br>
+                            <label class="quiz"></label>
+                            <br>
+                            <label class="quiz"></label>
+                            <br>
+                            <label class="quiz"></label>
+                            <br>
+                    </div>
+                    <div id="modal-footer">
+                        <div>
+                            <div id="status">&nbsp;</div>
+                            <button type="button" class="btn btn-primary" id="next-btn">Next</button>
+                            <button type="button" class="btn btn-primary" id="finish-btn">Finish</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/js/bootstrap.min.js" integrity="sha384-3qaqj0lc6sV/qpzrc1N5DC6i1VRn/HyX4qdPaiEFbn54VjQBEU341pvjz7Dv3n6P" crossorigin="anonymous"></script>
+        <script src="assets/main.js"></script>
+        <script src="assets/questions.js"></script>
+    </body>
+</html>
