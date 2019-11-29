@@ -69,14 +69,14 @@ function checkAnswer(userChoice){
        statusEl.css("color","#3dab07");
     }else{
         incorrect++;
-        if(remainingTime>=15){
+        if(remainingTime>=10){
             console.log("being called");
-            remainingTime=remainingTime-15;
+            remainingTime=remainingTime-10;
         }else{
             remainingTime=0;
             timeEl.innerHTML=remainingTime;
         }
-        statusEl.html("Incorrect! You lost 15 seconds.<br>Correct answer is: "+correctAnswer);
+        statusEl.html("Incorrect! You lost 10 seconds.<br>Correct answer is: "+correctAnswer);
         statusEl.css("color","red");
     }
 }
@@ -107,6 +107,7 @@ function calculateScore(){
 function saveScore(){
 playerName=$(".form-control").val();
    localStorage.setItem("Code_Quiz_Player-"+playerName,totalScore);
+   location.reload();
 }  
 
 function displayHighScore(){
