@@ -8,6 +8,7 @@
     var nextBtn=document.getElementById("next-btn");
     var finishBtn=document.getElementById("finish-btn");
     var saveBtn=document.getElementById("save-btn");
+    var closeBtn=document.getElementById("close-btn");
     var status=document.getElementById("status");
     var radios=document.getElementsByName("quiz");
     var highScore=document.getElementById("high-score");
@@ -95,9 +96,9 @@ function endQuiz(status){
 
 function calculateScore(){
     if(correct>0){
-    totalScore+=correct*5;
+    totalScore+=correct*10;
     if(remainingTime>0){
-        totalScore+=remainingTime/(incorrect+skipped+1);
+        totalScore+=remainingTime/(incorrect+skipped+2);
         }
     }
     totalScore=Math.floor(totalScore);
@@ -111,7 +112,8 @@ playerName=$(".form-control").val();
 }  
 
 function displayHighScore(){
-    modalFooter.innerText="";
+    $("#next-btn").css("display","none");
+    $("#close-btn").css("display","block");
     modalTitle.textContent="The highest score: ";
     modalBody.innerHTML="";
     var maxName="undefined";
@@ -147,6 +149,9 @@ finishBtn.addEventListener("click",function(){
 });
 saveBtn.addEventListener("click",saveScore);
 highScore.addEventListener("click",displayHighScore);
+closeBtn.addEventListener("click",function(){
+    location.reload();
+});
 
 
 var nameInputHtml="<br>"+"<input placeholder=\"Enter your name here\" class=\"form-control\"></input>";
